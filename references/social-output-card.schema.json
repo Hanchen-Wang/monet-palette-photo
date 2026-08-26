@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Monet Social Output Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "layout",
+    "canvas_ratio",
+    "canvas_width",
+    "background_strategy",
+    "background_color",
+    "original_position",
+    "generated_position",
+    "fit",
+    "panel_width_percent",
+    "outer_margin_percent",
+    "inter_panel_gap_percent"
+  ],
+  "properties": {
+    "layout": {"const": "comparison_poster"},
+    "canvas_ratio": {"enum": ["4:5", "9:16", "1:1"]},
+    "canvas_width": {"type": "integer", "minimum": 720, "maximum": 2160},
+    "background_strategy": {"enum": ["source_warm", "custom"]},
+    "background_color": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}
+      ]
+    },
+    "original_position": {"const": "top"},
+    "generated_position": {"const": "bottom"},
+    "fit": {"const": "contain"},
+    "panel_width_percent": {"type": "number", "minimum": 60, "maximum": 92},
+    "outer_margin_percent": {"type": "number", "minimum": 4, "maximum": 15},
+    "inter_panel_gap_percent": {"type": "number", "minimum": 2, "maximum": 10}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"background_strategy": {"const": "source_warm"}}},
+      "then": {"properties": {"background_color": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"background_strategy": {"const": "custom"}}},
+      "then": {"properties": {"background_color": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}}}
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "mode": "atmospheric_monetization",
+  "strength": "M2",
+  "presentation_profile": "immersive",
+  "shape_abstraction": null,
+  "source_pixel_policy": "partial_required",
+  "source_orientation": "portrait",
+  "semantic_anchor": "a person pauses beside a pond and looks across the water",
+  "primary_subject": "the person at the pond edge",
+  "supporting_elements": ["pond reflection", "sunlit foliage", "distant bank"],
+  "spatial_invariants": [
+    "the person remains left of the pond's main reflection",
+    "the reflected vertical aligns beneath the distant foliage",
+    "the gaze opens toward the right side of the frame"
+  ],
+  "protected_elements": ["face", "hands", "pose", "garment silhouette"],
+  "discard": ["small shoreline clutter", "unrelated paint splashes", "invented flowers or bridge"],
+  "impressionability_candidates": [
+    {
+      "zone": "pond reflection",
+      "light": 3,
+      "atmosphere": 2,
+      "reflection": 4,
+      "color_variation": 4,
+      "edge_instability": 4,
+      "total": 17,
+      "rationale": "broken reflected light and unstable horizontal edges carry the strongest color event"
+    },
+    {
+      "zone": "sunlit foliage",
+      "light": 4,
+      "atmosphere": 1,
+      "reflection": 1,
+      "color_variation": 4,
+      "edge_instability": 3,
+      "total": 13,
+      "rationale": "small warm and cool light fragments can echo the water without becoming a second subject"
+    },
+    {
+      "zone": "photographic person",
+      "light": 2,
+      "atmosphere": 0,
+      "reflection": 0,
+      "color_variation": 2,
+      "edge_instability": 0,
+      "total": 4,
+      "rationale": "the person is the stable semantic anchor and should remain photographic"
+    }
+  ],
+  "primary_monet_zone": "pond reflection",
+  "primary_zone_override": "",
+  "secondary_monet_zones": ["sunlit foliage"],
+  "preserve_photo_zones": ["photographic person", "face and hands"],
+  "simplify_zones": ["distant bank"],
+  "line_zones": [],
+  "negative_space_zones": ["quiet upper-right sky"],
+  "light_card": {
+    "direction": "upper left toward lower right",
+    "temperature": "warm direct light with cool reflected counter-color",
+    "intensity": "medium",
+    "diffusion": "moderate through foliage",
+    "time_or_condition": "late-afternoon clear light",
+    "surface_interactions": ["warm flecks on leaves", "broken warm reflection across cooler water"],
+    "highlight_family": "cream and pale yellow-green",
+    "shadow_family": "blue-violet chromatic dark",
+    "reflection_relation": "warm foliage light breaks into cooler horizontal water notes"
+  },
+  "palette_families": [
+    "blue-green water dominant",
+    "cobalt cool counter",
+    "cream light-bearing notes",
+    "pale rose reflected warmth",
+    "yellow-green foliage sparks",
+    "deep blue-violet chromatic dark"
+  ],
+  "brush_map": [
+    {
+      "zone": "pond reflection",
+      "primary_family": "horizontal_shimmer",
+      "supporting_family": "broad_flat_patches",
+      "direction": "broken horizontal bands aligned to the water plane",
+      "scale": "medium foreground to smaller distance",
+      "density": "moderate with visible quiet gaps"
+    },
+    {
+      "zone": "sunlit foliage",
+      "primary_family": "broken_dabs",
+      "supporting_family": null,
+      "direction": "clustered along observed branch and light rhythms",
+      "scale": "small",
+      "density": "sparse and subordinate"
+    }
+  ],
+  "edge_map": [
+    {"zone": "face and hands", "level": "L1", "reason": "protected identity"},
+    {"zone": "garment silhouette", "level": "L2", "reason": "soft handoff without identity drift"},
+    {"zone": "sunlit foliage", "level": "L3", "reason": "broken light and leaf movement"},
+    {"zone": "pond reflection", "level": "L4", "reason": "reflected forms dissolve in moving water"}
+  ],
+  "background_treatment": "preserve",
+  "transition_strategy": "reflection_bridge",
+  "composition": {
+    "focal_order": ["photographic person", "painted pond reflection", "sunlit foliage echo"],
+    "eye_path": "from the person's gaze across the water and back through the reflected light",
+    "crop_ratio": "preserve source portrait ratio",
+    "source_allocation": "retain the person and immediate ground; paint only water reflection and selected foliage light"
+  },
+  "visible_text": ""
+}

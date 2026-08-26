@@ -1,0 +1,6 @@
+interface:
+  display_name: "Monet-Palette-Photo"
+  short_description: "Social-ready Monet photo transformation"
+  default_prompt: "Use $monet-palette-photo to create a sparse, source-responsive Monet transformation and optionally package it as an original-over-generated comparison poster."
+policy:
+  allow_implicit_invocation: true

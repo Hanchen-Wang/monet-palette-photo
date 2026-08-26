@@ -1,0 +1,13 @@
+{
+  "layout": "comparison_poster",
+  "canvas_ratio": "4:5",
+  "canvas_width": 1080,
+  "background_strategy": "source_warm",
+  "background_color": null,
+  "original_position": "top",
+  "generated_position": "bottom",
+  "fit": "contain",
+  "panel_width_percent": 84,
+  "outer_margin_percent": 6,
+  "inter_panel_gap_percent": 4
+}

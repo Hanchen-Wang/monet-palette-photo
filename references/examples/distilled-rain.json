@@ -1,0 +1,123 @@
+{
+  "mode": "distilled_monet",
+  "strength": "M4",
+  "presentation_profile": "sparse_social",
+  "shape_abstraction": {
+    "semantic_minimum": "two separated figures crossing a broad reflective field",
+    "dominant_gesture": "a shallow diagonal crossing the horizontal wet-ground bands",
+    "source_shape_candidates": ["paired figure silhouettes", "broad reflective street field"],
+    "retain": ["two-figure interval", "street-to-haze depth relation"],
+    "merge": ["vehicles and storefronts into one distant building mass"],
+    "omit": ["signage", "window-by-window detail", "street clutter"],
+    "transform": ["wet street into a broad broken-color field", "rain into a soft vertical rhythm"],
+    "expose": ["upper rain field as a low-information atmospheric area"],
+    "primary_grammar": "field",
+    "supporting_grammar": "silhouette",
+    "detail_removal_percent": 78,
+    "quiet_area_percent": 68,
+    "active_shape_percent": 24,
+    "thumbnail_anchor": "the paired dark figures against one restrained amber reflection"
+  },
+  "source_pixel_policy": "none_retained",
+  "source_orientation": "landscape",
+  "semantic_anchor": "two small figures cross a broad wet street under diffuse rain",
+  "primary_subject": "the interval between the two crossing figures",
+  "supporting_elements": ["wet street", "rain haze", "distant building mass"],
+  "spatial_invariants": [
+    "the figures remain separated along a shallow diagonal",
+    "the street occupies the dominant lower field",
+    "distant mass remains above the reflective surface"
+  ],
+  "protected_elements": ["two-figure relationship", "crossing direction"],
+  "discard": ["vehicle details", "signage", "window-by-window architecture", "invented umbrellas or landmarks"],
+  "impressionability_candidates": [
+    {
+      "zone": "wet street field",
+      "light": 3,
+      "atmosphere": 3,
+      "reflection": 4,
+      "color_variation": 3,
+      "edge_instability": 4,
+      "total": 17,
+      "rationale": "reflected light and rain dissolve the street into the main surface rhythm"
+    },
+    {
+      "zone": "rain haze",
+      "light": 2,
+      "atmosphere": 4,
+      "reflection": 1,
+      "color_variation": 3,
+      "edge_instability": 4,
+      "total": 14,
+      "rationale": "diffusion can erase architecture while preserving depth and weather"
+    },
+    {
+      "zone": "crossing figures",
+      "light": 1,
+      "atmosphere": 2,
+      "reflection": 2,
+      "color_variation": 1,
+      "edge_instability": 2,
+      "total": 8,
+      "rationale": "the figures are low-detail semantic anchors rather than the main color event"
+    }
+  ],
+  "primary_monet_zone": "wet street field",
+  "primary_zone_override": "",
+  "secondary_monet_zones": ["rain haze"],
+  "preserve_photo_zones": [],
+  "simplify_zones": ["distant building mass", "crossing figures"],
+  "line_zones": [],
+  "negative_space_zones": ["upper rain field"],
+  "light_card": {
+    "direction": "diffuse overhead with weak lateral reflections",
+    "temperature": "cool with restrained warm reflected notes",
+    "intensity": "low",
+    "diffusion": "high",
+    "time_or_condition": "overcast rain",
+    "surface_interactions": ["cool veil through distance", "broken warm and cool reflections on wet ground"],
+    "highlight_family": "cool white and gray-blue",
+    "shadow_family": "mauve and blue-green chromatic dark",
+    "reflection_relation": "distant warm windows stretch into fragmented cool street reflections"
+  },
+  "palette_families": [
+    "gray-blue atmospheric ground",
+    "mauve rain counter",
+    "cool white diffused light",
+    "blue-green wet-surface family",
+    "restrained amber reflection",
+    "deep violet chromatic dark"
+  ],
+  "brush_map": [
+    {
+      "zone": "wet street field",
+      "primary_family": "broad_flat_patches",
+      "supporting_family": "horizontal_shimmer",
+      "direction": "broad lateral sweeps interrupted by shallow reflected bands",
+      "scale": "large foreground patches",
+      "density": "open but materially visible"
+    },
+    {
+      "zone": "rain haze",
+      "primary_family": "feathered_atmosphere",
+      "supporting_family": "vertical_veil",
+      "direction": "soft downward veil merging into the distant mass",
+      "scale": "medium to broad",
+      "density": "low contrast and layered"
+    }
+  ],
+  "edge_map": [
+    {"zone": "crossing figures", "level": "L2", "reason": "keep the relationship readable without photorealism"},
+    {"zone": "wet street field", "level": "L3", "reason": "broken reflected surface"},
+    {"zone": "rain haze", "level": "L4", "reason": "atmosphere dissolves distant certainty"}
+  ],
+  "background_treatment": "simplify",
+  "transition_strategy": "dissolve",
+  "composition": {
+    "focal_order": ["wet street color field", "two-figure interval", "rain haze"],
+    "eye_path": "across the reflective lower field, through the diagonal between figures, then into the dissolving distance",
+    "crop_ratio": "preserve source landscape orientation",
+    "source_allocation": "recompose the source into broad wet surface, small relational figures, and an atmospheric upper field"
+  },
+  "visible_text": ""
+}

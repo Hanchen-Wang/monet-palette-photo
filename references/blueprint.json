@@ -1,0 +1,385 @@
+{
+  "skill": {
+    "name": "monet-palette-photo",
+    "display_name": "Monet-Palette-Photo",
+    "description": "Transform a user-supplied photograph through source-responsive Monet-inspired color, light, brushwork, edge logic, and optional sparse social-media art direction. Route among full, subject-only, atmospheric, zine-hybrid, and distilled treatments, then optionally package the original and generated image as a warm comparison poster.",
+    "language": "English",
+    "build_status": "ready",
+    "invocation": "implicit"
+  },
+  "identity": {
+    "promise": "Preserve a photograph's identity and spatial logic while translating explicitly selected regions into source-responsive Monet-inspired color, light, brushwork, and perceptual structure.",
+    "output_medium": "one generated or edited raster image, or an original-over-generated comparison poster, plus a concise routing and art-direction rationale",
+    "positive_identity": [
+      "selection precedes transformation",
+      "painted zones are chosen from light, atmosphere, reflection, color variation, and edge instability",
+      "palette, brush, and edge behavior remain traceable to the supplied photograph",
+      "mutually incompatible source-pixel policies are isolated by mode",
+      "a sparse social profile can reduce detail and expose source-derived quiet fields without changing mode",
+      "comparison-poster delivery is deterministic and separate from image generation"
+    ],
+    "anti_identity": [
+      "uniform whole-image oil-paint filter",
+      "automatic pastel styling",
+      "black-shadow default with no chromatic variation",
+      "random brush texture unrelated to surface, depth, or light",
+      "invented water lilies, bridges, gardens, flowers, or sunsets",
+      "dense collage filler that competes with the semantic anchor",
+      "generative recreation of the original-over-generated poster layout"
+    ]
+  },
+  "trigger": {
+    "use_when": [
+      "the user wants a photograph reinterpreted through Monet-inspired color and brush logic",
+      "the user wants only light, atmosphere, reflection, a subject, or selected regions transformed",
+      "the user wants a photo-and-paint zine hybrid or a distilled impressionist reconstruction",
+      "the user wants a social-ready sparse treatment with extracted shapes and deliberate negative space",
+      "the user wants the original above the generated result on a warm comparison poster"
+    ],
+    "do_not_use_when": [
+      "the user wants a generic oil-paint filter with no selective art direction",
+      "the user needs a text-heavy editorial page or commercial key visual",
+      "the user has not supplied a photograph"
+    ],
+    "examples": [
+      "Keep the person photographic and turn only the water reflection and sunlit foliage into impressionist paint.",
+      "Use Full Impression at M3 while preserving the street geometry and figure identities.",
+      "Distill this rainy scene into an M4 painting with no source pixels and a sparse social profile.",
+      "Put the original above the generated result on a warm 4:5 comparison poster."
+    ]
+  },
+  "source_contract": {
+    "input_kinds": [
+      "one user-supplied photograph",
+      "optional mode and strength",
+      "optional exact short title or caption",
+      "optional presentation profile and delivery layout",
+      "optional exact comparison-poster background color or destination ratio"
+    ],
+    "roles": [
+      {
+        "source": "user photograph",
+        "role": "factual_anchor",
+        "retention": "allowed",
+        "authority": [
+          "subject identity and anatomy",
+          "objects and place",
+          "spatial geometry and reflection axes",
+          "observed light, atmosphere, and native color relations",
+          "mode-specific source-pixel retention"
+        ]
+      },
+      {
+        "source": "optional user text",
+        "role": "factual_anchor",
+        "retention": "required",
+        "authority": ["exact visible wording and language"]
+      },
+      {
+        "source": "user-provided design conversation",
+        "role": "style_reference",
+        "retention": "not_applicable",
+        "authority": ["selective transformation concept", "five-mode architecture", "palette, brush, light, edge, and QA requirements"]
+      }
+    ],
+    "precedence": [
+      "the selected mode's source-pixel policy outranks aesthetic preference",
+      "source identity and decisive spatial relations outrank painterly texture",
+      "presentation profile controls density but never changes the selected mode's source-pixel policy",
+      "delivery layout operates only on accepted raster panels and never changes either panel",
+      "observed light and surface behavior outrank generic Monet associations",
+      "user-supplied exact text outranks authored wording"
+    ],
+    "allowed_transformations": [
+      "source-responsive color decomposition and chromatic shadow construction",
+      "surface-, depth-, and light-directed brush translation",
+      "mode-specific preservation, simplification, line reduction, paper removal, or spatial recomposition",
+      "controlled edge softening, breaking, and loss",
+      "source-derived photo-to-paint transitions",
+      "source-derived silhouette, contour, field, rhythm, or cutout abstraction",
+      "deterministic original-over-generated comparison composition"
+    ],
+    "forbidden_inventions": [
+      "unrequested people, objects, scenery, weather, reflections, or architecture",
+      "water lilies, bridges, gardens, flowers, sunsets, and other painter-associated clichés absent from the source",
+      "invented dates, coordinates, labels, quotations, credits, signatures, or watermarks",
+      "uniform filter texture across every surface and depth layer",
+      "invented poster labels, metadata, shadows, tape, or decorative props"
+    ],
+    "handling": [
+      "inspect the supplied photograph directly and do not browse for substitute imagery",
+      "send only the final prompt and required source image to the configured generation or editing service",
+      "do not save, search, publish, or redistribute the source unless the user asks",
+      "disclose external-service use briefly after generation"
+    ]
+  },
+  "analysis_card": {
+    "minimum_anchors": 3,
+    "fields": [
+      {"name": "mode", "question": "Which single transformation mode controls source-pixel retention and visual treatment?", "required": true},
+      {"name": "presentation_profile", "question": "Should the artwork use immersive field coverage or sparse social-media density?", "required": true, "default": "Use explicit cues, then the selected mode's profile default."},
+      {"name": "semantic_anchor", "question": "Which subject or relationship makes this photograph meaningful?", "required": true},
+      {"name": "spatial_invariants", "question": "Which positions, axes, directions, scales, or overlaps must survive?", "required": true},
+      {"name": "protected_elements", "question": "Which faces, hands, logos, text, identity features, or structures must not drift?", "required": true},
+      {"name": "impressionability_candidates", "question": "Which zones score highest for light, atmosphere, reflection, color variation, and edge instability?", "required": true},
+      {"name": "transformation_map", "question": "Which zones are painted, preserved, simplified, drawn, or removed into negative space?", "required": true},
+      {"name": "light_card", "question": "What are the observed direction, temperature, intensity, diffusion, surface interaction, highlights, shadows, and reflection relation?", "required": true},
+      {"name": "palette_families", "question": "Which source-responsive dominant, light, warm/cool counter, reflection, and chromatic-dark families construct the Monet zones?", "required": true},
+      {"name": "brush_map", "question": "Which brush family, direction, scale, and density belongs to each painted zone?", "required": true},
+      {"name": "edge_map", "question": "Which zones use L1 defined, L2 soft, L3 broken, or L4 lost edges?", "required": true},
+      {"name": "shape_abstraction", "question": "For sparse social work, what semantic minimum, source shapes, retain/merge/omit/transform/expose actions, graphic grammar, density budget, and thumbnail anchor control reduction?", "required": false, "default": "Null for immersive; required and validated for sparse_social."},
+      {"name": "background_treatment", "question": "Should the support remain photographic, simplified, line-based, or paper-like?", "required": false, "default": "Select from the mode and source; background must visually defer."},
+      {"name": "visible_text", "question": "What exact short title or caption, if any, should appear?", "required": false, "default": "No visible text"}
+    ]
+  },
+  "creative_logic": {
+    "decision_priority": [
+      "preserve the semantic anchor and required identity",
+      "obey the selected mode's source-pixel policy",
+      "retain decisive spatial relationships",
+      "select a presentation profile without altering source-pixel policy",
+      "choose zones through Impressionability Map evidence",
+      "let light control palette, brush, and edge behavior",
+      "for sparse work, reduce detail through one source-derived graphic grammar and protect quiet fields",
+      "make supporting regions defer",
+      "remove unplanned transformation before adding texture"
+    ],
+    "reasoning_chain": [
+      "inspect source facts",
+      "select one mode and one presentation profile",
+      "score impressionability candidates",
+      "build the transformation and preservation map",
+      "resolve light and palette roles",
+      "assign brush and edge behavior",
+      "choose background, transition, and optional sparse shape system",
+      "compile visible instructions",
+      "inspect against Monet authenticity and thumbnail QA",
+      "optionally compose an accepted original-over-generated poster and run delivery QA"
+    ],
+    "branches": [
+      {
+        "name": "Full Impression",
+        "when": "the user explicitly wants the complete photograph repainted",
+        "contract": "retain source identity and composition but no source pixels",
+        "reference": "references/modes/full-impression.md"
+      },
+      {
+        "name": "Subject Monetization",
+        "when": "the user wants the primary subject painted against a reduced non-photographic background",
+        "contract": "retain subject identity semantically but no source pixels by default",
+        "reference": "references/modes/subject-monetization.md"
+      },
+      {
+        "name": "Atmospheric Monetization",
+        "when": "the user wants the anchor photographic and light, air, water, reflection, or unstable edges painted",
+        "contract": "partial source-pixel preservation is required",
+        "reference": "references/modes/atmospheric-monetization.md"
+      },
+      {
+        "name": "Zine Hybrid",
+        "when": "the user wants truthful photo material combined with paint, paper, or restrained linework",
+        "contract": "partial source-pixel preservation is required and zine devices remain subordinate",
+        "reference": "references/modes/zine-hybrid.md"
+      },
+      {
+        "name": "Distilled Monet",
+        "when": "the user wants a freer semantic and structural distillation with no photography",
+        "contract": "no source pixels; preserve only selected semantic, spatial, light, and color anchors",
+        "reference": "references/modes/distilled-monet.md"
+      }
+    ]
+  },
+  "visual_grammar": {
+    "must_have": [
+      "one semantic anchor and one dominant painted event",
+      "source-responsive color decomposition with chromatic darks",
+      "brush direction tied to surface, depth, motion, reflection, or light",
+      "edge hierarchy tied to identity and atmosphere",
+      "a source-derived transition or a fully repainted no-pixel contract",
+      "for sparse social work, one primary graphic grammar and deliberate quiet fields"
+    ],
+    "variable_slots": [
+      "five transformation modes",
+      "M1 through M4 strength",
+      "primary and up to two secondary Monet zones",
+      "six brush families",
+      "four edge levels",
+      "four background treatments",
+      "five transition strategies plus none",
+      "immersive and sparse_social presentation profiles",
+      "silhouette, contour, field, rhythm, and cutout graphic grammars",
+      "artwork-only and comparison-poster delivery layouts"
+    ],
+    "anti_patterns": [
+      "whole-image filter when a selective mode is chosen",
+      "pastelification",
+      "neutral black-shadow default",
+      "random or uniform brushstroke texture",
+      "every edge equally blurred or equally sharp",
+      "hard digital photo-to-paint split",
+      "zine devices overpowering paint and source identity",
+      "equal detail across the frame or several competing collage clusters",
+      "poster layout generated by an image model instead of deterministic composition",
+      "invented Monet clichés"
+    ]
+  },
+  "composition": {
+    "aspect_ratio_policy": "preserve source orientation by default; use another ratio only for an explicit output destination",
+    "layout_families": [
+      "source composition retained with selective painted zones",
+      "photographic anchor plus source-derived atmospheric paint field",
+      "subject-led painted form against simplified, line, or paper support",
+      "asymmetric zine hybrid linked by a real light, gaze, path, or reflection axis",
+      "distilled broad-field reconstruction with two to four source anchors",
+      "sparse source-derived active cluster surrounded by blank or low-information fields",
+      "warm comparison poster with truthful original above and accepted artwork below"
+    ],
+    "hierarchy": [
+      "semantic anchor remains readable",
+      "one Monet zone is the dominant perceptual event",
+      "secondary painted zones support the same event",
+      "background and typography remain subordinate"
+    ],
+    "negative_space_policy": "use quiet source, simplified color, paper, haze, water, wall, sky, or fully painted low-information fields to separate ideas; sparse_social targets 45–85% quiet area and forbids filler marks",
+    "source_allocation": "determined by the selected mode and transformation card; never use a mechanical half-and-half split"
+  },
+  "color_typography_material": {
+    "color": {
+      "policy": "build five to nine source-responsive color families or roles around observed light, warm/cool counterpoint, reflection, and chromatic darks",
+      "roles": ["dominant local family", "light-bearing family", "warm counter", "cool counter", "reflected or environmental family", "chromatic dark", "optional transition or accent"],
+      "constraints": ["no universal pastel palette", "no object-label single colors", "no arbitrary rainbow", "water follows real reflection evidence", "dark zones remain chromatic"]
+    },
+    "typography": {
+      "policy": "use no visible text by default; allow one exact two-to-four-word title or one very short caption",
+      "roles": ["optional subordinate title or caption"],
+      "constraints": ["no invented metadata", "no fake quotation or signature", "no large commercial headline", "zine type remains subordinate"],
+      "exact_text_strategy": "generate art without text and composite deterministically when spelling is production-critical"
+    },
+    "material": {
+      "policy": "use matte, surface-responsive painterly behavior in transformed zones and flat presentation for hybrid work",
+      "roles": ["source photography where retained", "selective painted surface", "optional restrained paper or line support", "quiet warm comparison-poster background"],
+      "constraints": ["no canvas or gallery mockup", "no frame shadow or easel", "no uniform impasto", "paper depth remains flat and subordinate"]
+    }
+  },
+  "prompt_compiler": {
+    "field_order": [
+      "task, mode, strength, presentation profile, and output orientation",
+      "source fidelity and protected elements",
+      "transformation, preservation, reduction, and discard map",
+      "light interpretation",
+      "source-responsive palette construction",
+      "zone-specific brush map",
+      "edge hierarchy and transition",
+      "optional sparse shape system",
+      "background treatment and composition",
+      "exact short text or no text",
+      "material behavior and hard avoids"
+    ],
+    "visible_pixel_rule": "Include only source-specific directions that affect the visible result or required tool behavior; keep scores, JSON, file paths, provenance, and internal analysis out of the render prompt. Keep comparison-poster layout out of the render prompt because it is deterministic post-processing.",
+    "negative_constraints": [
+      "no mode/source-pixel contradiction",
+      "no painting outside the validated mask in partial modes",
+      "no uniform oil-paint filter, universal pastel palette, or flat black-shadow default",
+      "no random brush behavior, hard digital split, or invented Monet motif",
+      "no text other than exact user-supplied short copy"
+    ],
+    "execution_mode": "edit",
+    "tool_requirements": [
+      "a reference-image generation or editing tool",
+      "regional editing, masking, or deterministic compositing for partial-preservation modes",
+      "visual inspection capability for result QA when available"
+    ],
+    "fallback": "return the validated card, complete English render prompt, zone/mask plan, and parameters while stating which fidelity capability is unavailable",
+    "prompt_visibility": "on_request"
+  },
+  "qa": {
+    "pre_generation": [
+      "one mode is selected and compatible with the source-pixel policy",
+      "the source photograph has been inspected",
+      "semantic anchor, protected elements, and spatial invariants are explicit",
+      "Impressionability scores and zone assignments are valid",
+      "light, palette, brush, edge, background, transition, and text fields are resolved",
+      "the Transformation Card passes the bundled validator",
+      "sparse_social resolves a semantic minimum, one primary grammar, density budgets, quiet fields, and thumbnail anchor",
+      "comparison_poster resolves a Social Output Card only after artwork approval"
+    ],
+    "result_checks": [
+      "semantic anchor and spatial relationship remain readable",
+      "only planned zones are transformed and source-pixel rules are respected",
+      "light changes local color and chromatic shadows remain colored",
+      "warm/cool variation and reflection relationships are visible where planned",
+      "brush direction and scale respond to surface, depth, and light",
+      "edge hierarchy and transition behave as planned",
+      "background and zine devices remain subordinate",
+      "sparse social artwork has one active cluster, deliberate quiet fields, and thumbnail legibility",
+      "comparison poster preserves both panels and visible background spacing",
+      "no invented motif, object, weather, reflection, metadata, or signature appears"
+    ],
+    "repair_dimensions": [
+      "source fidelity",
+      "mask spill or mode selectivity",
+      "palette relation or chromatic shadows",
+      "brush direction, scale, or density",
+      "edge hierarchy",
+      "transition boundary",
+      "background hierarchy",
+      "sparse density or thumbnail clarity",
+      "poster layout without artwork regeneration",
+      "text rendering"
+    ],
+    "max_automatic_regenerations": 1
+  },
+  "output_contract": {
+    "default_deliverables": [
+      "one generated or edited raster image, or the composed comparison poster when requested",
+      "selected mode, M1–M4 strength, and presentation profile",
+      "one concise rationale naming the Monet zones and decisive perceptual relationship",
+      "brief external-service disclosure when a source image was sent for generation or editing"
+    ],
+    "on_request": ["validated transformation card", "Social Output Card", "final English prompt", "palette recipe", "targeted QA or revision notes", "standalone artwork in addition to a poster"],
+    "failure_behavior": "state the unavailable capability or named failed QA dimension and return the complete prompt and zone plan without claiming an unperformed or unsuccessful transformation"
+  },
+  "provenance": {
+    "sources": [
+      {
+        "name": "Gathered Scenes Zine",
+        "url": "https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/skills/scenes-gathered-zine-v1-3/SKILL.md",
+        "patterns_consulted": ["scene analysis before styling", "retain/merge/omit/transform reduction", "single graphic grammar", "negative-space and density budgets"]
+      },
+      {
+        "name": "Scene Distillation Zine",
+        "url": "https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/skills/scene-distillation-zine-v1-3/SKILL.md",
+        "patterns_consulted": ["semantic nucleus", "anchor reduction", "quiet paper field", "thumbnail-oriented composition"]
+      },
+      {
+        "name": "ni-poster",
+        "url": "https://github.com/ttttstc/ni-skill/blob/main/skills/ni-poster/SKILL.md",
+        "patterns_consulted": ["small active cluster", "large negative space", "single thumbnail anchor"]
+      },
+      {
+        "name": "photo-abstract-editorial reference",
+        "url": "https://github.com/ttttstc/ni-skill/blob/main/skills/ni-poster/references/photo-abstract-editorial.md",
+        "patterns_consulted": ["adaptive stacked image panels", "source-derived background", "clean separation between content areas"]
+      }
+    ],
+    "license_notes": [
+      "The visual-system requirements were derived from a user-supplied design conversation and rewritten as original skill instructions.",
+      "The skill describes Monet-inspired color and perceptual principles without bundling third-party artwork, prompt text, or example images.",
+      "Public zine skills were consulted for high-level architecture and visual-design patterns only. Their wording, assets, examples, and layouts were not copied.",
+      "Repository-specific licenses remain authoritative for the consulted sources; this skill stores only original summaries and source URLs."
+    ],
+    "originality_statement": "This implementation independently structures the supplied concept into mode routing, profile routing, source-derived shape abstraction, deterministic comparison-poster delivery, schemas, prompt compilation, and observable QA."
+  },
+  "assumptions": [
+    {"field": "skill.display_name", "value": "Monet-Palette-Photo", "basis": "confirmed"},
+    {"field": "skill.language", "value": "English", "basis": "confirmed"},
+    {"field": "skill.invocation", "value": "implicit", "basis": "defaulted"},
+    {"field": "composition.aspect_ratio_policy", "value": "preserve source orientation", "basis": "defaulted"},
+    {"field": "typography.default", "value": "no visible text", "basis": "defaulted"},
+    {"field": "qa.max_automatic_regenerations", "value": 1, "basis": "defaulted"},
+    {"field": "mode.light_and_reflection_triggers", "value": "strategies inside Atmospheric Monetization", "basis": "inferred"},
+    {"field": "presentation_profile.default", "value": "mode-dependent: sparse_social for Subject, Zine, and Distilled; immersive for Full and Atmospheric", "basis": "revised from user goal"},
+    {"field": "comparison_poster.default", "value": "4:5 at 1080 px wide, source-derived warm background, contained panels, no labels", "basis": "defaulted from user goal"}
+  ],
+  "open_questions": []
+}
