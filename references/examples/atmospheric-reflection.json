@@ -3,6 +3,8 @@
   "strength": "M2",
   "presentation_profile": "immersive",
   "shape_abstraction": null,
+  "zine_strategy": "not_applicable",
+  "zine_cutout_plan": null,
   "source_pixel_policy": "partial_required",
   "source_orientation": "portrait",
   "semantic_anchor": "a person pauses beside a pond and looks across the water",

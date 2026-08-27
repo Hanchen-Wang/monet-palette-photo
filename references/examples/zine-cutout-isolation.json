@@ -1,0 +1,123 @@
+{
+  "mode": "zine_hybrid",
+  "strength": "M3",
+  "presentation_profile": "sparse_social",
+  "shape_abstraction": {
+    "semantic_minimum": "a person faces a band of reflected evening water",
+    "dominant_gesture": "the gaze travels from the figure toward the horizontal reflection",
+    "source_shape_candidates": ["photographic person cutout", "painted water-reflection cutout"],
+    "retain": ["person-to-reflection gaze relation", "horizontal reflection band"],
+    "merge": [],
+    "omit": ["shoreline buildings", "sky", "minor waterfront clutter"],
+    "transform": ["water reflection into a single Monet-painted cutout"],
+    "expose": ["all unselected source regions as warm quiet paper"],
+    "primary_grammar": "cutout",
+    "supporting_grammar": null,
+    "detail_removal_percent": 76,
+    "quiet_area_percent": 48,
+    "active_shape_percent": 47,
+    "thumbnail_anchor": "the photographic figure facing one luminous painted water band"
+  },
+  "zine_strategy": "cutout_isolation",
+  "zine_cutout_plan": {
+    "anchor_cutout": "photographic person cutout",
+    "monet_carrier_cutout": "painted water-reflection cutout",
+    "anchor_treatment": "photographic",
+    "anchor_scope": "the complete person, face, hair, glasses, hands, pose, garment silhouette, and attached bag",
+    "identity_lock": "source_pixel_cutout",
+    "recognition_features": ["face", "hands", "pose", "garment silhouette"],
+    "anchor_prominence": "primary",
+    "anchor_long_axis_percent": 64,
+    "carrier_treatment": "monet_painted",
+    "carrier_evidence": "the water contains the strongest reflected light, warm-cool variation, and unstable horizontal edges",
+    "boundary_logic": "both silhouettes follow their visible source contours with one restrained torn-paper edge language",
+    "relation_to_preserve": "the person's gaze opens toward the reflection band at the original distance and height",
+    "background_field": "flat warm ivory paper sampled from the source highlights",
+    "quiet_area_percent": 48,
+    "discard_everything_else": true
+  },
+  "source_pixel_policy": "partial_required",
+  "source_orientation": "portrait",
+  "semantic_anchor": "a person looks toward a luminous evening reflection",
+  "primary_subject": "the person beside the water",
+  "supporting_elements": ["reflected light band", "water surface"],
+  "spatial_invariants": [
+    "the person remains left of the reflection band",
+    "the gaze remains directed into the open paper between the two pieces",
+    "the reflection keeps its source-derived horizontal orientation"
+  ],
+  "protected_elements": ["face", "hands", "pose", "garment silhouette"],
+  "discard": ["all source scenery outside the two selected cutouts", "invented scraps, text, tape, or Monet motifs"],
+  "impressionability_candidates": [
+    {
+      "zone": "painted water-reflection cutout",
+      "light": 4,
+      "atmosphere": 2,
+      "reflection": 4,
+      "color_variation": 4,
+      "edge_instability": 4,
+      "total": 18,
+      "rationale": "broken reflected light and unstable horizontal edges make this the clearest Monet color carrier"
+    },
+    {
+      "zone": "distant sky band",
+      "light": 3,
+      "atmosphere": 3,
+      "reflection": 0,
+      "color_variation": 3,
+      "edge_instability": 2,
+      "total": 11,
+      "rationale": "the sky has soft color but is less relationally important than the water reflection"
+    }
+  ],
+  "primary_monet_zone": "painted water-reflection cutout",
+  "primary_zone_override": "",
+  "secondary_monet_zones": [],
+  "preserve_photo_zones": ["photographic person cutout"],
+  "simplify_zones": [],
+  "line_zones": [],
+  "negative_space_zones": ["all source regions outside the two cutouts"],
+  "light_card": {
+    "direction": "from the open water toward the figure",
+    "temperature": "warm reflected light with cool water counter-color",
+    "intensity": "medium",
+    "diffusion": "moderate across the water surface",
+    "time_or_condition": "calm late-evening light",
+    "surface_interactions": ["warm reflection fragments across cooler horizontal water bands"],
+    "highlight_family": "peach cream and pale gold",
+    "shadow_family": "blue-violet chromatic dark",
+    "reflection_relation": "warm sky light breaks into narrow cool-water intervals"
+  },
+  "palette_families": [
+    "blue-green water dominant",
+    "peach reflected warmth",
+    "pale gold light notes",
+    "cool lavender counter",
+    "warm ivory paper",
+    "deep blue-violet chromatic dark"
+  ],
+  "brush_map": [
+    {
+      "zone": "painted water-reflection cutout",
+      "primary_family": "horizontal_shimmer",
+      "supporting_family": "broken_dabs",
+      "direction": "short broken horizontal bands following the source water plane",
+      "scale": "medium with smaller light fragments",
+      "density": "moderate inside the carrier and absent elsewhere"
+    }
+  ],
+  "edge_map": [
+    {"zone": "photographic person cutout", "level": "L1", "reason": "protect identity and the readable body silhouette"},
+    {"zone": "painted water-reflection cutout boundary", "level": "L2", "reason": "keep the carrier readable as one source-derived paper piece"},
+    {"zone": "painted water-reflection cutout interior", "level": "L4", "reason": "dissolve reflected forms through broken water marks"}
+  ],
+  "background_treatment": "paper",
+  "transition_strategy": "torn_field",
+  "composition": {
+    "focal_order": ["photographic person cutout", "painted water-reflection cutout", "quiet warm paper"],
+    "eye_path": "from the person's face across the retained gaze space into the horizontal painted reflection",
+    "crop_ratio": "preserve source portrait orientation",
+    "source_allocation": "retain only the person and water-reflection cutouts; convert every other source region to paper"
+  },
+  "visible_text": ""
+}

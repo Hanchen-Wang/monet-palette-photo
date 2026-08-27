@@ -1,6 +1,6 @@
 interface:
   display_name: "Monet-Palette-Photo"
-  short_description: "Social-ready Monet photo transformation"
-  default_prompt: "Use $monet-palette-photo to create a sparse, source-responsive Monet transformation and optionally package it as an original-over-generated comparison poster."
+  short_description: "Sparse Monet photo and two-cutout zine art"
+  default_prompt: "Use $monet-palette-photo to create a source-responsive Monet transformation, optionally isolating one photographic anchor and one painted carrier as two cutouts on quiet paper."
 policy:
   allow_implicit_invocation: true

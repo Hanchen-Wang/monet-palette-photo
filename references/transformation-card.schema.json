@@ -8,6 +8,8 @@
     "strength",
     "presentation_profile",
     "shape_abstraction",
+    "zine_strategy",
+    "zine_cutout_plan",
     "source_pixel_policy",
     "source_orientation",
     "semantic_anchor",
@@ -91,9 +93,59 @@
               "oneOf": [{"$ref": "#/$defs/graphicGrammar"}, {"type": "null"}]
             },
             "detail_removal_percent": {"type": "integer", "minimum": 60, "maximum": 90},
-            "quiet_area_percent": {"type": "integer", "minimum": 45, "maximum": 85},
-            "active_shape_percent": {"type": "integer", "minimum": 10, "maximum": 35},
+            "quiet_area_percent": {"type": "integer", "minimum": 30, "maximum": 90},
+            "active_shape_percent": {"type": "integer", "minimum": 10, "maximum": 65},
             "thumbnail_anchor": {"type": "string", "minLength": 3}
+          }
+        }
+      ]
+    },
+    "zine_strategy": {"enum": ["not_applicable", "integrated_field", "cutout_isolation"]},
+    "zine_cutout_plan": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "anchor_cutout",
+            "monet_carrier_cutout",
+            "anchor_treatment",
+            "anchor_scope",
+            "identity_lock",
+            "recognition_features",
+            "anchor_prominence",
+            "anchor_long_axis_percent",
+            "carrier_treatment",
+            "carrier_evidence",
+            "boundary_logic",
+            "relation_to_preserve",
+            "background_field",
+            "quiet_area_percent",
+            "discard_everything_else"
+          ],
+          "properties": {
+            "anchor_cutout": {"type": "string", "minLength": 1},
+            "monet_carrier_cutout": {"type": "string", "minLength": 1},
+            "anchor_treatment": {"const": "photographic"},
+            "anchor_scope": {"type": "string", "minLength": 5},
+            "identity_lock": {"const": "source_pixel_cutout"},
+            "recognition_features": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 8,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "anchor_prominence": {"enum": ["primary", "balanced"]},
+            "anchor_long_axis_percent": {"type": "integer", "minimum": 45, "maximum": 80},
+            "carrier_treatment": {"const": "monet_painted"},
+            "carrier_evidence": {"type": "string", "minLength": 5},
+            "boundary_logic": {"type": "string", "minLength": 5},
+            "relation_to_preserve": {"type": "string", "minLength": 5},
+            "background_field": {"type": "string", "minLength": 3},
+            "quiet_area_percent": {"type": "integer", "minimum": 30, "maximum": 60},
+            "discard_everything_else": {"const": true}
           }
         }
       ]
@@ -214,6 +266,79 @@
     "visible_text": {"type": "string", "maxLength": 80}
   },
   "allOf": [
+    {
+      "if": {"properties": {"mode": {"not": {"const": "zine_hybrid"}}}},
+      "then": {
+        "properties": {
+          "zine_strategy": {"const": "not_applicable"},
+          "zine_cutout_plan": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"mode": {"const": "zine_hybrid"}}},
+      "then": {"properties": {"zine_strategy": {"enum": ["integrated_field", "cutout_isolation"]}}}
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {"const": "zine_hybrid"},
+          "zine_strategy": {"const": "integrated_field"}
+        }
+      },
+      "then": {"properties": {"zine_cutout_plan": {"type": "null"}}}
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {"const": "zine_hybrid"},
+          "zine_strategy": {"const": "cutout_isolation"}
+        }
+      },
+      "then": {
+        "properties": {
+          "presentation_profile": {"const": "sparse_social"},
+          "zine_cutout_plan": {"type": "object"},
+          "secondary_monet_zones": {"maxItems": 0},
+          "preserve_photo_zones": {"minItems": 1, "maxItems": 1},
+          "simplify_zones": {"maxItems": 0},
+          "line_zones": {"maxItems": 0},
+          "negative_space_zones": {"minItems": 1},
+          "background_treatment": {"const": "paper"},
+          "transition_strategy": {"const": "torn_field"},
+          "visible_text": {"maxLength": 0},
+          "shape_abstraction": {
+            "type": "object",
+            "properties": {
+              "primary_grammar": {"const": "cutout"},
+              "supporting_grammar": {"type": "null"},
+              "quiet_area_percent": {"minimum": 30, "maximum": 60},
+              "active_shape_percent": {"minimum": 35, "maximum": 65}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"zine_strategy": {"not": {"const": "cutout_isolation"}}}},
+      "then": {
+        "properties": {
+          "zine_cutout_plan": {"type": "null"},
+          "shape_abstraction": {
+            "oneOf": [
+              {"type": "null"},
+              {
+                "type": "object",
+                "properties": {
+                  "quiet_area_percent": {"minimum": 45, "maximum": 85},
+                  "active_shape_percent": {"minimum": 10, "maximum": 35}
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
     {
       "if": {"properties": {"mode": {"enum": ["atmospheric_monetization", "zine_hybrid"]}}},
       "then": {

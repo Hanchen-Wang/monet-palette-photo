@@ -57,6 +57,8 @@ Use the selected mode's natural field coverage. Even a fully painted frame still
 
 Reduce the scene to one dominant active cluster and at most two supporting marks. Prefer a single source-derived graphic grammar: silhouette, contour, field, rhythm, or cutout. A second grammar may support it but must not compete.
 
+Exception: Zine Hybrid with `cutout_isolation` permits exactly two active source-derived pieces—the photographic anchor and painted carrier—and no supporting marks or second grammar. The anchor is visually primary or balanced with the carrier; 30–60% of the frame is unmarked paper.
+
 Translate source material through five actions:
 
 - retain one or two defining forms or relationships;
@@ -87,6 +89,10 @@ In `sparse_social`, a quiet field may be retained photography, simplified color,
 - **Light bridge:** transformation follows the actual footprint of illumination.
 - **Reflection bridge:** painted reflection answers a photographic subject across a real axis.
 - **Torn field:** a restrained fibrous paper boundary; Zine Hybrid only.
+
+For `cutout_isolation`, Torn Field is the single organizing boundary system rather than a decorative overlay. It must follow both selected source-region contours and must not create extra scraps.
+
+For a photographic human, animal, product, landmark, or identity-sensitive object, treat the anchor as an original-pixel composite layer. The painted carrier may be generated, but it must not regenerate, restyle, or cover the anchor.
 
 Transitions must follow source geometry or light. Never use a generic gradient or decorative paint splash.
 

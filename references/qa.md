@@ -6,6 +6,7 @@ Run preflight before generation and visual QA on the actual result when it can b
 
 - [ ] Exactly one mode is selected.
 - [ ] Exactly one presentation profile is selected.
+- [ ] `zine_strategy` is resolved, and `zine_cutout_plan` exists only for `cutout_isolation`.
 - [ ] Mode and source-pixel policy are compatible.
 - [ ] A supplied photograph is available and has been inspected.
 - [ ] Semantic anchor, protected elements, and spatial invariants are explicit.
@@ -17,6 +18,7 @@ Run preflight before generation and visual QA on the actual result when it can b
 - [ ] Visible text is exact and short, or explicitly absent.
 - [ ] The Transformation Card passes `scripts/validate_transformation_card.py`.
 - [ ] For `sparse_social`, the Shape Extraction Card resolves one primary grammar, a thumbnail anchor, quiet fields, and density budgets.
+- [ ] For `cutout_isolation`, the anchor and carrier are distinct source regions, the anchor scope and recognition features are explicit, their relation is preserved, and all other scene content is assigned to paper.
 
 ## Visual QA
 
@@ -68,6 +70,21 @@ Apply only when `presentation_profile=sparse_social`:
 - [ ] Dense source detail has been merged or omitted instead of redrawn at smaller scale.
 - [ ] Quiet fields do not accumulate filler marks, captions, stickers, or unrelated collage devices.
 
+### Zine Cutout Isolation
+
+Apply only when `zine_strategy=cutout_isolation`:
+
+- [ ] Exactly two active cutouts remain: one photographic anchor and one Monet-painted carrier.
+- [ ] The photographic anchor uses original source pixels rather than a regenerated likeness.
+- [ ] Face, anatomy, pose, clothing, attached belongings, object geometry, and other recorded recognition features match the source.
+- [ ] The complete anchor remains immediately recognizable at thumbnail size and carries primary or balanced visual weight.
+- [ ] Both cutout boundaries correspond to distinct, traceable source regions.
+- [ ] One source relationship between the two pieces remains legible.
+- [ ] Every other source region is absent rather than faded, simplified, redrawn, or painted.
+- [ ] Quiet paper occupies 30–60% of the frame; it separates the two pieces without dominating them.
+- [ ] There is no supporting grammar, extra collage scrap, linework, text, decorative mark, or invented motif.
+- [ ] Paint remains inside the carrier and does not spill into the photographic anchor or paper.
+
 ### Comparison Poster
 
 Apply only after composing `comparison_poster`:
@@ -83,6 +100,7 @@ Apply only after composing `comparison_poster`:
 Use one label:
 
 - `source_fidelity`
+- `subject_recognition`
 - `mask_spill`
 - `mode_selectivity`
 - `palette_relation`
@@ -93,6 +111,8 @@ Use one label:
 - `background_hierarchy`
 - `sparse_density`
 - `thumbnail_clarity`
+- `cutout_isolation`
+- `background_leakage`
 - `poster_layout`
 - `text_rendering`
 

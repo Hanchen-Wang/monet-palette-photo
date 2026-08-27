@@ -1,6 +1,6 @@
 # Mode router
 
-Select exactly one mode and one presentation profile before building the transformation card. Mode controls source-pixel retention and transformation scope. Presentation profile controls density and negative space. Explicit names and explicit source-pixel instructions win over inference.
+Select exactly one mode and one presentation profile before building the transformation card. For Zine Hybrid, also select exactly one Zine strategy. Mode controls source-pixel retention and transformation scope. Presentation profile controls density and negative space. Zine strategy controls whether the retained regions form an integrated field or an isolated two-cutout system. Explicit names and explicit source-pixel instructions win over inference.
 
 ## Decision order
 
@@ -50,6 +50,18 @@ Light-triggered and Reflection-triggered Monetization are strategies inside Atmo
 - **Reflection-triggered** — the real subject remains photographic while its reflection or reflective environment becomes painted.
 
 They are not separate top-level modes because they share the same partial-preservation contract.
+
+## Zine-strategy routing
+
+Apply only after selecting Zine Hybrid:
+
+1. Select `cutout_isolation` when the user asks to cut out the main anchor and the primary Monet carrier, keep only those regions, discard the remaining scene, or leave the rest as blank paper.
+2. Select `integrated_field` for a generic Zine Hybrid request or when photo, paint, paper, and optional linework should remain part of one sparse scene.
+3. If the user asks only for “more zine” or “more minimal” and either interpretation would materially change the image, ask:
+
+   > Should the result keep a sparse integrated scene, or retain only two cutouts—the photographic anchor and the painted Monet carrier—on blank paper?
+
+For every non-Zine mode, set `zine_strategy` to `not_applicable` and `zine_cutout_plan` to `null`. Do not reinterpret `cutout_isolation` as permission to invent an arbitrary collage shape.
 
 ## Presentation-profile routing
 

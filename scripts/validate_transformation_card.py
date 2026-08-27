@@ -19,6 +19,7 @@ MODES = {
 }
 STRENGTHS = {"M1", "M2", "M3", "M4"}
 PRESENTATION_PROFILES = {"immersive", "sparse_social"}
+ZINE_STRATEGIES = {"not_applicable", "integrated_field", "cutout_isolation"}
 GRAPHIC_GRAMMARS = {"silhouette", "contour", "field", "rhythm", "cutout"}
 ORIENTATIONS = {"portrait", "landscape", "square"}
 BRUSH_FAMILIES = {
@@ -38,6 +39,8 @@ REQUIRED_TOP = {
     "strength",
     "presentation_profile",
     "shape_abstraction",
+    "zine_strategy",
+    "zine_cutout_plan",
     "source_pixel_policy",
     "source_orientation",
     "semantic_anchor",
@@ -118,6 +121,19 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
     profile = data["presentation_profile"]
     if profile not in PRESENTATION_PROFILES:
         errors.append("presentation_profile must be immersive or sparse_social")
+    zine_strategy = data["zine_strategy"]
+    zine_plan = data["zine_cutout_plan"]
+    if zine_strategy not in ZINE_STRATEGIES:
+        errors.append("zine_strategy must be not_applicable, integrated_field, or cutout_isolation")
+    if mode == "zine_hybrid":
+        if zine_strategy not in {"integrated_field", "cutout_isolation"}:
+            errors.append("zine_hybrid requires zine_strategy=integrated_field or cutout_isolation")
+    elif zine_strategy != "not_applicable":
+        errors.append("non-Zine modes require zine_strategy=not_applicable")
+    if zine_strategy != "cutout_isolation" and zine_plan is not None:
+        errors.append("zine_cutout_plan must be null unless zine_strategy=cutout_isolation")
+    if zine_strategy == "cutout_isolation" and profile != "sparse_social":
+        errors.append("cutout_isolation requires presentation_profile=sparse_social")
     if data["source_orientation"] not in ORIENTATIONS:
         errors.append("source_orientation must be portrait, landscape, or square")
 
@@ -173,8 +189,8 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
                 errors.append("supporting_grammar must differ from primary_grammar")
             budgets = {
                 "detail_removal_percent": (60, 90),
-                "quiet_area_percent": (45, 85),
-                "active_shape_percent": (10, 35),
+                "quiet_area_percent": (30, 60) if zine_strategy == "cutout_isolation" else (45, 85),
+                "active_shape_percent": (35, 65) if zine_strategy == "cutout_isolation" else (10, 35),
             }
             for field, (low, high) in budgets.items():
                 value = shape[field]
@@ -189,7 +205,7 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
     nonempty_string(data["primary_subject"], "primary_subject", errors)
     supporting = string_array(data["supporting_elements"], "supporting_elements", errors, min_items=1, max_items=3)
     string_array(data["spatial_invariants"], "spatial_invariants", errors, min_items=1)
-    string_array(data["protected_elements"], "protected_elements", errors)
+    protected = string_array(data["protected_elements"], "protected_elements", errors)
     string_array(data["discard"], "discard", errors, min_items=1)
     if not supporting:
         warnings.append("the source has no validated supporting context")
@@ -233,7 +249,7 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
     nonempty_string(primary, "primary_monet_zone", errors)
     secondary = string_array(data["secondary_monet_zones"], "secondary_monet_zones", errors, max_items=2)
     preserve = string_array(data["preserve_photo_zones"], "preserve_photo_zones", errors)
-    string_array(data["simplify_zones"], "simplify_zones", errors)
+    simplify_zones = string_array(data["simplify_zones"], "simplify_zones", errors)
     line_zones = string_array(data["line_zones"], "line_zones", errors)
     negative_zones = string_array(data["negative_space_zones"], "negative_space_zones", errors)
     if profile == "sparse_social" and not negative_zones:
@@ -252,6 +268,93 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
         errors.append(f"{mode} requires at least one preserved photo zone")
     if mode in {"full_impression", "subject_monetization", "distilled_monet"} and preserve:
         errors.append(f"{mode} cannot retain photo zones")
+
+    if zine_strategy == "cutout_isolation":
+        expected_plan = {
+            "anchor_cutout",
+            "monet_carrier_cutout",
+            "anchor_treatment",
+            "anchor_scope",
+            "identity_lock",
+            "recognition_features",
+            "anchor_prominence",
+            "anchor_long_axis_percent",
+            "carrier_treatment",
+            "carrier_evidence",
+            "boundary_logic",
+            "relation_to_preserve",
+            "background_field",
+            "quiet_area_percent",
+            "discard_everything_else",
+        }
+        if not isinstance(zine_plan, dict) or set(zine_plan) != expected_plan:
+            errors.append("zine_cutout_plan has missing or unsupported fields")
+        else:
+            for field in (
+                "anchor_cutout",
+                "monet_carrier_cutout",
+                "anchor_scope",
+                "carrier_evidence",
+                "boundary_logic",
+                "relation_to_preserve",
+                "background_field",
+            ):
+                nonempty_string(zine_plan[field], f"zine_cutout_plan.{field}", errors)
+            if zine_plan["anchor_treatment"] != "photographic":
+                errors.append("zine_cutout_plan.anchor_treatment must be photographic")
+            if zine_plan["identity_lock"] != "source_pixel_cutout":
+                errors.append("zine_cutout_plan.identity_lock must be source_pixel_cutout")
+            recognition = string_array(
+                zine_plan["recognition_features"],
+                "zine_cutout_plan.recognition_features",
+                errors,
+                min_items=3,
+                max_items=8,
+            )
+            missing_protection = set(recognition) - set(protected)
+            if missing_protection:
+                errors.append(
+                    "every recognition feature must also appear in protected_elements: "
+                    + ", ".join(sorted(missing_protection))
+                )
+            if zine_plan["anchor_prominence"] not in {"primary", "balanced"}:
+                errors.append("zine_cutout_plan.anchor_prominence must be primary or balanced")
+            anchor_extent = zine_plan["anchor_long_axis_percent"]
+            if (
+                not isinstance(anchor_extent, int)
+                or isinstance(anchor_extent, bool)
+                or not 45 <= anchor_extent <= 80
+            ):
+                errors.append("zine_cutout_plan.anchor_long_axis_percent must be an integer from 45 to 80")
+            if zine_plan["carrier_treatment"] != "monet_painted":
+                errors.append("zine_cutout_plan.carrier_treatment must be monet_painted")
+            if zine_plan["discard_everything_else"] is not True:
+                errors.append("zine_cutout_plan.discard_everything_else must be true")
+            plan_quiet = zine_plan["quiet_area_percent"]
+            if not isinstance(plan_quiet, int) or isinstance(plan_quiet, bool) or not 30 <= plan_quiet <= 60:
+                errors.append("zine_cutout_plan.quiet_area_percent must be an integer from 30 to 60")
+            if len(preserve) != 1:
+                errors.append("cutout_isolation requires exactly one preserve_photo_zone")
+            elif zine_plan["anchor_cutout"] != preserve[0]:
+                errors.append("zine_cutout_plan.anchor_cutout must exactly match the sole preserve_photo_zone")
+            if zine_plan["monet_carrier_cutout"] != primary:
+                errors.append("zine_cutout_plan.monet_carrier_cutout must exactly match primary_monet_zone")
+            if isinstance(shape, dict) and isinstance(plan_quiet, int):
+                if plan_quiet != shape.get("quiet_area_percent"):
+                    errors.append("zine_cutout_plan.quiet_area_percent must equal shape_abstraction.quiet_area_percent")
+        if secondary:
+            errors.append("cutout_isolation does not allow secondary_monet_zones")
+        if simplify_zones:
+            errors.append("cutout_isolation does not allow simplify_zones")
+        if line_zones:
+            errors.append("cutout_isolation does not allow line_zones")
+        if not negative_zones:
+            errors.append("cutout_isolation requires a negative_space_zone for the removed remainder")
+        if isinstance(shape, dict):
+            if shape.get("primary_grammar") != "cutout":
+                errors.append("cutout_isolation requires shape_abstraction.primary_grammar=cutout")
+            if shape.get("supporting_grammar") is not None:
+                errors.append("cutout_isolation requires shape_abstraction.supporting_grammar=null")
 
     override = data["primary_zone_override"]
     if not isinstance(override, str):
@@ -344,6 +447,11 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
         warnings.append("line background selected without any line_zones")
     if data["background_treatment"] == "paper" and not negative_zones:
         warnings.append("paper background selected without any negative_space_zones")
+    if zine_strategy == "cutout_isolation":
+        if data["background_treatment"] != "paper":
+            errors.append("cutout_isolation requires background_treatment=paper")
+        if data["transition_strategy"] != "torn_field":
+            errors.append("cutout_isolation requires transition_strategy=torn_field")
 
     composition = data["composition"]
     expected_composition = {"focal_order", "eye_path", "crop_ratio", "source_allocation"}
@@ -361,6 +469,8 @@ def validate(data: Any) -> tuple[list[str], list[str]]:
         errors.append("visible_text must be 80 characters or fewer")
     elif text and len(text.split()) > 4:
         warnings.append("visible_text exceeds the recommended four-word English title limit")
+    if zine_strategy == "cutout_isolation" and text:
+        errors.append("cutout_isolation requires visible_text to be empty by default")
 
     return errors, warnings
 

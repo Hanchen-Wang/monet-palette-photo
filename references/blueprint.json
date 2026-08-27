@@ -2,7 +2,7 @@
   "skill": {
     "name": "monet-palette-photo",
     "display_name": "Monet-Palette-Photo",
-    "description": "Transform a user-supplied photograph through source-responsive Monet-inspired color, light, brushwork, edge logic, and optional sparse social-media art direction. Route among full, subject-only, atmospheric, zine-hybrid, and distilled treatments, then optionally package the original and generated image as a warm comparison poster.",
+    "description": "Transform a user-supplied photograph through source-responsive Monet-inspired color, light, brushwork, edge logic, and optional sparse social-media art direction. Route among full, subject-only, atmospheric, zine-hybrid, and distilled treatments. Zine Hybrid can preserve one prominent original-pixel anchor cutout beside one painted color-event cutout with 30–60% quiet paper, and the accepted result can optionally be packaged as a warm comparison poster.",
     "language": "English",
     "build_status": "ready",
     "invocation": "implicit"
@@ -16,7 +16,8 @@
       "palette, brush, and edge behavior remain traceable to the supplied photograph",
       "mutually incompatible source-pixel policies are isolated by mode",
       "a sparse social profile can reduce detail and expose source-derived quiet fields without changing mode",
-      "comparison-poster delivery is deterministic and separate from image generation"
+      "comparison-poster delivery is deterministic and separate from image generation",
+      "Zine Cutout Isolation retains exactly one original-pixel photographic anchor with primary recognition weight and one separately traceable painted carrier while keeping 30–60% quiet paper"
     ],
     "anti_identity": [
       "uniform whole-image oil-paint filter",
@@ -25,7 +26,9 @@
       "random brush texture unrelated to surface, depth, or light",
       "invented water lilies, bridges, gardens, flowers, or sunsets",
       "dense collage filler that competes with the semantic anchor",
-      "generative recreation of the original-over-generated poster layout"
+      "generative recreation of the original-over-generated poster layout",
+      "arbitrary decorative cutouts or surviving scenery in a two-cutout isolation result",
+      "a regenerated likeness presented as a preserved photographic anchor"
     ]
   },
   "trigger": {
@@ -33,6 +36,7 @@
       "the user wants a photograph reinterpreted through Monet-inspired color and brush logic",
       "the user wants only light, atmosphere, reflection, a subject, or selected regions transformed",
       "the user wants a photo-and-paint zine hybrid or a distilled impressionist reconstruction",
+      "the user wants only a photographic anchor and the main Monet color carrier cut out on blank paper",
       "the user wants a social-ready sparse treatment with extracted shapes and deliberate negative space",
       "the user wants the original above the generated result on a warm comparison poster"
     ],
@@ -45,7 +49,8 @@
       "Keep the person photographic and turn only the water reflection and sunlit foliage into impressionist paint.",
       "Use Full Impression at M3 while preserving the street geometry and figure identities.",
       "Distill this rainy scene into an M4 painting with no source pixels and a sparse social profile.",
-      "Put the original above the generated result on a warm 4:5 comparison poster."
+      "Put the original above the generated result on a warm 4:5 comparison poster.",
+      "Cut out the person as photography and the reflected-light carrier as paint; remove everything else to quiet paper."
     ]
   },
   "source_contract": {
@@ -53,7 +58,7 @@
       "one user-supplied photograph",
       "optional mode and strength",
       "optional exact short title or caption",
-      "optional presentation profile and delivery layout",
+      "optional presentation profile, Zine strategy, and delivery layout",
       "optional exact comparison-poster background color or destination ratio"
     ],
     "roles": [
@@ -87,6 +92,7 @@
       "source identity and decisive spatial relations outrank painterly texture",
       "presentation profile controls density but never changes the selected mode's source-pixel policy",
       "delivery layout operates only on accepted raster panels and never changes either panel",
+      "cutout_isolation requires two distinct source regions, an original-pixel identity lock, and 30–60% quiet paper",
       "observed light and surface behavior outrank generic Monet associations",
       "user-supplied exact text outranks authored wording"
     ],
@@ -97,6 +103,7 @@
       "controlled edge softening, breaking, and loss",
       "source-derived photo-to-paint transitions",
       "source-derived silhouette, contour, field, rhythm, or cutout abstraction",
+      "two-mask isolation of one photographic anchor and one Monet-painted carrier with the inverse removed to paper",
       "deterministic original-over-generated comparison composition"
     ],
     "forbidden_inventions": [
@@ -104,7 +111,8 @@
       "water lilies, bridges, gardens, flowers, sunsets, and other painter-associated clichés absent from the source",
       "invented dates, coordinates, labels, quotations, credits, signatures, or watermarks",
       "uniform filter texture across every surface and depth layer",
-      "invented poster labels, metadata, shadows, tape, or decorative props"
+      "invented poster labels, metadata, shadows, tape, or decorative props",
+      "extra collage scraps, linework, scenery, or arbitrary shapes in a Cutout Isolation result"
     ],
     "handling": [
       "inspect the supplied photograph directly and do not browse for substitute imagery",
@@ -118,6 +126,8 @@
     "fields": [
       {"name": "mode", "question": "Which single transformation mode controls source-pixel retention and visual treatment?", "required": true},
       {"name": "presentation_profile", "question": "Should the artwork use immersive field coverage or sparse social-media density?", "required": true, "default": "Use explicit cues, then the selected mode's profile default."},
+      {"name": "zine_strategy", "question": "For Zine Hybrid, should photo and paint remain an integrated sparse scene or become exactly two isolated cutouts?", "required": true, "default": "not_applicable outside Zine Hybrid; integrated_field for a generic Zine request; cutout_isolation when the user asks to keep only the anchor and carrier."},
+      {"name": "zine_cutout_plan", "question": "When Cutout Isolation is selected, what are the exact anchor scope, recognition features, original-pixel identity lock, primary scale, Monet carrier, source evidence, boundary logic, surviving relation, and 30–60% quiet paper field?", "required": false, "default": "Null unless zine_strategy=cutout_isolation."},
       {"name": "semantic_anchor", "question": "Which subject or relationship makes this photograph meaningful?", "required": true},
       {"name": "spatial_invariants", "question": "Which positions, axes, directions, scales, or overlaps must survive?", "required": true},
       {"name": "protected_elements", "question": "Which faces, hands, logos, text, identity features, or structures must not drift?", "required": true},
@@ -138,15 +148,18 @@
       "obey the selected mode's source-pixel policy",
       "retain decisive spatial relationships",
       "select a presentation profile without altering source-pixel policy",
+      "for Zine Hybrid, select integrated_field or cutout_isolation before assigning regions",
       "choose zones through Impressionability Map evidence",
       "let light control palette, brush, and edge behavior",
       "for sparse work, reduce detail through one source-derived graphic grammar and protect quiet fields",
+      "for cutout isolation, retain exactly one original-pixel photo anchor at primary or balanced prominence, one painted carrier, 30–60% paper, and delete every other region",
       "make supporting regions defer",
       "remove unplanned transformation before adding texture"
     ],
     "reasoning_chain": [
       "inspect source facts",
       "select one mode and one presentation profile",
+      "resolve one Zine strategy when applicable",
       "score impressionability candidates",
       "build the transformation and preservation map",
       "resolve light and palette roles",
@@ -178,7 +191,7 @@
       {
         "name": "Zine Hybrid",
         "when": "the user wants truthful photo material combined with paint, paper, or restrained linework",
-        "contract": "partial source-pixel preservation is required and zine devices remain subordinate",
+        "contract": "partial source-pixel preservation is required; integrated_field remains the default, while cutout_isolation requires one original-pixel photographic anchor at primary or balanced prominence, one painted carrier, and 30–60% quiet paper",
         "reference": "references/modes/zine-hybrid.md"
       },
       {
@@ -196,7 +209,8 @@
       "brush direction tied to surface, depth, motion, reflection, or light",
       "edge hierarchy tied to identity and atmosphere",
       "a source-derived transition or a fully repainted no-pixel contract",
-      "for sparse social work, one primary graphic grammar and deliberate quiet fields"
+      "for sparse social work, one primary graphic grammar and deliberate quiet fields",
+      "for cutout isolation, exactly two source-derived active pieces linked by one preserved source relation, with the original-pixel anchor immediately recognizable"
     ],
     "variable_slots": [
       "five transformation modes",
@@ -208,7 +222,8 @@
       "five transition strategies plus none",
       "immersive and sparse_social presentation profiles",
       "silhouette, contour, field, rhythm, and cutout graphic grammars",
-      "artwork-only and comparison-poster delivery layouts"
+      "artwork-only and comparison-poster delivery layouts",
+      "integrated_field and cutout_isolation Zine strategies"
     ],
     "anti_patterns": [
       "whole-image filter when a selective mode is chosen",
@@ -220,7 +235,8 @@
       "zine devices overpowering paint and source identity",
       "equal detail across the frame or several competing collage clusters",
       "poster layout generated by an image model instead of deterministic composition",
-      "invented Monet clichés"
+      "invented Monet clichés",
+      "three or more pieces, auxiliary linework, or residual scenery in a two-cutout isolation result"
     ]
   },
   "composition": {
@@ -232,6 +248,7 @@
       "asymmetric zine hybrid linked by a real light, gaze, path, or reflection axis",
       "distilled broad-field reconstruction with two to four source anchors",
       "sparse source-derived active cluster surrounded by blank or low-information fields",
+      "one photographic anchor cutout and one painted carrier cutout separated by quiet paper",
       "warm comparison poster with truthful original above and accepted artwork below"
     ],
     "hierarchy": [
@@ -240,7 +257,7 @@
       "secondary painted zones support the same event",
       "background and typography remain subordinate"
     ],
-    "negative_space_policy": "use quiet source, simplified color, paper, haze, water, wall, sky, or fully painted low-information fields to separate ideas; sparse_social targets 45–85% quiet area and forbids filler marks",
+    "negative_space_policy": "use quiet source, simplified color, paper, haze, water, wall, sky, or fully painted low-information fields to separate ideas; sparse_social normally targets 45–85% quiet area, while cutout_isolation uses 30–60% true paper so the anchor and carrier remain substantial",
     "source_allocation": "determined by the selected mode and transformation card; never use a mechanical half-and-half split"
   },
   "color_typography_material": {
@@ -257,13 +274,13 @@
     },
     "material": {
       "policy": "use matte, surface-responsive painterly behavior in transformed zones and flat presentation for hybrid work",
-      "roles": ["source photography where retained", "selective painted surface", "optional restrained paper or line support", "quiet warm comparison-poster background"],
+      "roles": ["source photography where retained", "selective painted surface", "optional restrained paper or line support", "two source-derived flat cutouts when isolation is selected", "quiet warm comparison-poster background"],
       "constraints": ["no canvas or gallery mockup", "no frame shadow or easel", "no uniform impasto", "paper depth remains flat and subordinate"]
     }
   },
   "prompt_compiler": {
     "field_order": [
-      "task, mode, strength, presentation profile, and output orientation",
+      "task, mode, strength, presentation profile, applicable Zine strategy, and output orientation",
       "source fidelity and protected elements",
       "transformation, preservation, reduction, and discard map",
       "light interpretation",
@@ -271,6 +288,7 @@
       "zone-specific brush map",
       "edge hierarchy and transition",
       "optional sparse shape system",
+      "optional Cutout Isolation plan with original-pixel anchor scope, recognition features, primary scale, exact two-piece boundaries, surviving relation, and inverse-to-paper deletion",
       "background treatment and composition",
       "exact short text or no text",
       "material behavior and hard avoids"
@@ -281,7 +299,8 @@
       "no painting outside the validated mask in partial modes",
       "no uniform oil-paint filter, universal pastel palette, or flat black-shadow default",
       "no random brush behavior, hard digital split, or invented Monet motif",
-      "no text other than exact user-supplied short copy"
+      "no text other than exact user-supplied short copy",
+      "for cutout_isolation, no third piece, supporting grammar, residual scene, or painted paper field"
     ],
     "execution_mode": "edit",
     "tool_requirements": [
@@ -301,6 +320,7 @@
       "light, palette, brush, edge, background, transition, and text fields are resolved",
       "the Transformation Card passes the bundled validator",
       "sparse_social resolves a semantic minimum, one primary grammar, density budgets, quiet fields, and thumbnail anchor",
+      "cutout_isolation resolves two distinct source regions, exact card mappings, original-pixel identity lock, three to eight recognition features, one surviving relation, and a 30–60% paper field",
       "comparison_poster resolves a Social Output Card only after artwork approval"
     ],
     "result_checks": [
@@ -312,6 +332,7 @@
       "edge hierarchy and transition behave as planned",
       "background and zine devices remain subordinate",
       "sparse social artwork has one active cluster, deliberate quiet fields, and thumbnail legibility",
+      "cutout isolation has exactly one original-pixel photographic anchor piece with intact recognition features and one painted carrier piece with no background leakage",
       "comparison poster preserves both panels and visible background spacing",
       "no invented motif, object, weather, reflection, metadata, or signature appears"
     ],
@@ -324,6 +345,7 @@
       "transition boundary",
       "background hierarchy",
       "sparse density or thumbnail clarity",
+      "cutout count, subject recognition, source-pixel provenance, relation, or discarded-background leakage",
       "poster layout without artwork regeneration",
       "text rendering"
     ],
@@ -332,7 +354,7 @@
   "output_contract": {
     "default_deliverables": [
       "one generated or edited raster image, or the composed comparison poster when requested",
-      "selected mode, M1–M4 strength, and presentation profile",
+      "selected mode, M1–M4 strength, presentation profile, and applicable Zine strategy",
       "one concise rationale naming the Monet zones and decisive perceptual relationship",
       "brief external-service disclosure when a source image was sent for generation or editing"
     ],
@@ -344,12 +366,12 @@
       {
         "name": "Gathered Scenes Zine",
         "url": "https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/skills/scenes-gathered-zine-v1-3/SKILL.md",
-        "patterns_consulted": ["scene analysis before styling", "retain/merge/omit/transform reduction", "single graphic grammar", "negative-space and density budgets"]
+        "patterns_consulted": ["scene analysis before styling", "retain/merge/omit/transform reduction", "single graphic grammar", "source-derived cut-paper boundaries", "negative-space and density budgets"]
       },
       {
         "name": "Scene Distillation Zine",
         "url": "https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/skills/scene-distillation-zine-v1-3/SKILL.md",
-        "patterns_consulted": ["semantic nucleus", "anchor reduction", "quiet paper field", "thumbnail-oriented composition"]
+        "patterns_consulted": ["semantic nucleus", "anchor reduction", "deletion of realistic background", "quiet paper field", "thumbnail-oriented composition"]
       },
       {
         "name": "ni-poster",
@@ -379,7 +401,8 @@
     {"field": "qa.max_automatic_regenerations", "value": 1, "basis": "defaulted"},
     {"field": "mode.light_and_reflection_triggers", "value": "strategies inside Atmospheric Monetization", "basis": "inferred"},
     {"field": "presentation_profile.default", "value": "mode-dependent: sparse_social for Subject, Zine, and Distilled; immersive for Full and Atmospheric", "basis": "revised from user goal"},
-    {"field": "comparison_poster.default", "value": "4:5 at 1080 px wide, source-derived warm background, contained panels, no labels", "basis": "defaulted from user goal"}
+    {"field": "comparison_poster.default", "value": "4:5 at 1080 px wide, source-derived warm background, contained panels, no labels", "basis": "defaulted from user goal"},
+    {"field": "zine_strategy.default", "value": "integrated_field for generic Zine Hybrid; cutout_isolation only from explicit keep-two-and-remove-rest intent", "basis": "revised from user goal"}
   ],
   "open_questions": []
 }

@@ -12,6 +12,8 @@ The canonical structure is [transformation-card.schema.json](transformation-card
 - `strength`: `M1`, `M2`, `M3`, or `M4`.
 - `presentation_profile`: `immersive` or `sparse_social`.
 - `shape_abstraction`: `null` for `immersive`; a complete Shape Extraction Card for `sparse_social`.
+- `zine_strategy`: `not_applicable`, `integrated_field`, or `cutout_isolation`.
+- `zine_cutout_plan`: `null` except for `cutout_isolation`; then a complete two-cutout plan.
 - `source_pixel_policy`: `none_retained` or `partial_required`, consistent with the selected mode.
 - `source_orientation`: `portrait`, `landscape`, or `square`.
 
@@ -81,6 +83,30 @@ When `presentation_profile` is `sparse_social`, read [sparse-social.md](sparse-s
 
 For `immersive`, set `shape_abstraction` to `null`. The profile changes density only; mode remains authoritative for source-pixel retention.
 
+### Zine Cutout Isolation fields
+
+When `mode` is `zine_hybrid` and `zine_strategy` is `cutout_isolation`, read [zine-cutout-isolation.md](zine-cutout-isolation.md) and complete:
+
+- `anchor_cutout`: exactly the sole entry in `preserve_photo_zones`;
+- `monet_carrier_cutout`: exactly `primary_monet_zone`;
+- `anchor_treatment`: `photographic`;
+- `anchor_scope`: the complete identity-bearing subject, attached belongings, and any essential contact patch;
+- `identity_lock`: `source_pixel_cutout`;
+- `recognition_features`: three to eight source features that must remain exact;
+- `anchor_prominence`: `primary` or `balanced`;
+- `anchor_long_axis_percent`: 45–80, describing the intended longest on-canvas anchor dimension;
+- `carrier_treatment`: `monet_painted`;
+- `carrier_evidence`: the observed reason this region carries the Monet event;
+- `boundary_logic`: how both cutout boundaries derive from their source regions;
+- `relation_to_preserve`: one source spatial or perceptual relation between the cutouts;
+- `background_field`: the quiet paper color/material direction;
+- `quiet_area_percent`: 30–60 and equal to `shape_abstraction.quiet_area_percent`;
+- `discard_everything_else`: `true`.
+
+This strategy also requires `sparse_social`, `primary_grammar=cutout`, no supporting grammar, 35–65% active shape area, `background_treatment=paper`, `transition_strategy=torn_field`, exactly one preserved photo zone, no secondary Monet zones, no simplify or line zones, and at least one negative-space zone naming the removed remainder.
+
+For Zine Hybrid's normal sparse scene, use `zine_strategy=integrated_field` and `zine_cutout_plan=null`. For every non-Zine mode, use `zine_strategy=not_applicable` and `zine_cutout_plan=null`.
+
 ## Validation
 
 Run:
@@ -89,4 +115,4 @@ Run:
 python3 scripts/validate_transformation_card.py /path/to/card.json
 ```
 
-The validator checks structure, score totals, mode/source-pixel compatibility, zone collisions, palette size, edge levels, transitions, profile-dependent shape extraction, density budgets, and retry-independent invariants. Passing validation does not prove aesthetic success; use visual QA after generation.
+The validator checks structure, score totals, mode/source-pixel compatibility, zone collisions, palette size, edge levels, transitions, profile-dependent shape extraction, density budgets, Zine strategy invariants, and retry-independent constraints. Passing validation does not prove aesthetic success; use visual QA after generation.

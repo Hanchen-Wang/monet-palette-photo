@@ -52,6 +52,7 @@ Quiet areas may still contain subtle paper grain, flat color, haze, calm water, 
 - Subject Monetization: let the subject or its silhouette form the active cluster and reduce context to one or two cues.
 - Atmospheric Monetization: retain truthful anchor pixels while allowing large sky, water, haze, or light fields to become visually quiet.
 - Zine Hybrid: a photographic anchor, one paint event, and at most one paper or line support. Torn edges may be prominent but should remain one coherent boundary system.
+- Zine Hybrid with `cutout_isolation`: exactly two active source-derived cutouts, no supporting grammar, 30–60% quiet paper, and no surviving scenery outside the cutouts. The photographic anchor must remain the primary recognizable element, while the larger composition preserves one source spatial relation rather than making the pieces float as unrelated stickers.
 - Distilled Monet: no source pixels; express the semantic minimum through broad fields, rhythm, silhouette, or cutout-like painted shapes.
 
 ## Prompt implications

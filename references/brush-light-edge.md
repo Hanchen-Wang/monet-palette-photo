@@ -67,6 +67,6 @@ Describe the boundary as a source event:
 - brush follows a real contour or light footprint;
 - color breaks along an observed reflection or surface change;
 - edge certainty decreases with distance or atmosphere;
-- zine tearing follows a source-derived axis and remains subordinate.
+- zine tearing follows a source-derived axis and remains subordinate in `integrated_field`; in `cutout_isolation`, it becomes the single source-derived boundary system for the two permitted pieces and creates no extra scraps.
 
 Avoid hard digital splits, generic gradients, halos around people, and arbitrary paint splashes.

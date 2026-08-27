@@ -2,13 +2,20 @@
 
 Use when the user explicitly asks for a mixed photo, paint, paper, or restrained line-art composition.
 
+Resolve one strategy before composing:
+
+| Strategy | Result |
+|---|---|
+| `integrated_field` | One photographic anchor and one Monet paint event remain integrated in a sparse scene; one restrained paper or line support is optional. |
+| `cutout_isolation` | Exactly one prominent photographic anchor cutout and one separate Monet-painted carrier cutout remain; 30–60% of the frame becomes quiet paper. Read [../zine-cutout-isolation.md](../zine-cutout-isolation.md). |
+
 ## Source contract
 
 - Source role: truthful photographic anchor and factual source for painted and drawn extensions.
 - Source pixels in final: partial and required.
 - Preserve: one recognizable photo region containing the semantic anchor.
 - Transform: one source-derived light, atmosphere, reflection, or color field into Monet-inspired paint.
-- Optional support: one restrained Line or Paper treatment.
+- Optional support: one restrained Line or Paper treatment in `integrated_field`; none in `cutout_isolation`.
 
 ## Composition
 
@@ -20,6 +27,8 @@ Use when the user explicitly asks for a mixed photo, paint, paper, or restrained
 - Use only one primary boundary strategy. Torn Field is allowed here; Brush Intrusion, Dissolve, Light Bridge, and Reflection Bridge remain valid.
 - Keep paper flat and scanned rather than layered into a three-dimensional scrapbook.
 - Typography is optional and subordinate: one exact two-to-four-word title or one short caption.
+
+These are the `integrated_field` defaults. `cutout_isolation` replaces the broader scene with the stricter two-cutout contract and uses no supporting grammar or visible typography.
 
 ## Hierarchy
 
